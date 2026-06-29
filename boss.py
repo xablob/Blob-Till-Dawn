@@ -80,7 +80,9 @@ class Boss(pygame.sprite.Sprite):
 
         self.events = pygame.sprite.Group()
         Event_on_health_threshold(self, 0.5, emprisonne_le_joueur)
-        Event_on_health_threshold(self, 0.8, first_beams)
+        #Event_on_health_threshold(self, 0.8, first_beams)
+
+        self.effects = pygame.sprite.Group()
 
     def on_death_effect(self):
         pass
@@ -124,6 +126,8 @@ class Boss(pygame.sprite.Sprite):
     def part_vers_une_destination_mystérieuse(self, source):
         self.on_death_effect()
         self.drop_items()
+        for effect in self.effects.sprites():
+            effect.kill()
         self.kill()
 
     def drop_items(self):
@@ -235,9 +239,6 @@ def emprisonne_le_joueur(caster):
     EnemyObstacle(player_x + radius * np.cos(alpha_1), player_y + radius * np.sin(alpha_1), 2)
     EnemyObstacle(player_x + radius * np.cos(alpha_2), player_y + radius * np.sin(alpha_2), 2)
 
-
-from music import alert_sound, rock_sound
-from obstacles import EnemyObstacle
 
 
 def first_beams(entity):

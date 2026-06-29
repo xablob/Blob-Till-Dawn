@@ -14,6 +14,7 @@ class Rectangular_beam(pygame.sprite.Sprite):
         self.color = generate_random_color()
         self.rotation_speed = rotation_speed
         self.potential_targets = self.caster.potential_targets
+        caster.effects.add(self)
         
     def update(self):
         self.centerx = self.caster.rect.centerx

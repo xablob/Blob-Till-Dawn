@@ -195,6 +195,8 @@ class Event_on_health_threshold(pygame.sprite.Sprite):
 
     def activate(self):
         self.activation(self.entity)
+
+        
 def get_barycentre(points):
     x = 0
     y = 0
