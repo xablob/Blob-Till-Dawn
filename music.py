@@ -1,0 +1,28 @@
+import pygame
+
+pygame.mixer.init()
+
+dark_forest_sound = pygame.mixer.music.load("Assets/Music/DarkWinds.ogg")
+
+ghost_sound = pygame.mixer.Sound("Assets/Music/ghost_1.flac")
+ghost_sound.set_volume(0.25)
+evil_laugh_sound = pygame.mixer.Sound("Assets/Music/evil_laugh_02.ogg")
+evil_laugh_sound.set_volume(0.45)
+fireball_sound = pygame.mixer.Sound("Assets/Fireball/fireball_sound.wav")
+fireball_sound.set_volume(0.025)
+tp_sound = pygame.mixer.Sound("Assets/on_death_effects/bubble_01.ogg")
+tp_sound.set_volume(0.3)
+xp_sound_1 = pygame.mixer.Sound("Assets/XP Gain/xp_gain_1.mp3")
+xp_sound_1.set_volume(0.1)
+xp_sound_2 = pygame.mixer.Sound("Assets/XP Gain/xp_gain_2.mp3")
+xp_sound_2.set_volume(0.3)
+xp_sound_3 = pygame.mixer.Sound("Assets/XP Gain/xp_gain_3.mp3")
+xp_sound_3.set_volume(0.3)
+xp_sound_4 = pygame.mixer.Sound("Assets/XP Gain/xp_gain_4.mp3")
+xp_sound_4.set_volume(0.3)
+xp_sound_5 = pygame.mixer.Sound("Assets/XP Gain/xp_gain_5.mp3")
+xp_sound_5.set_volume(0.3)
+rock_sound = pygame.mixer.Sound("Assets/Music/rock_breaking.flac")
+rock_sound.set_volume(1)
+alert_sound = pygame.mixer.Sound("Assets/Music/alert.ogg")
+alert_sound.set_volume(0.7)

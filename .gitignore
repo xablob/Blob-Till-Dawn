@@ -1,0 +1,11 @@
+# python cache
+**.pyc
+# videos
+**.mp4
+# recordings
+souvenirs/**
+# vscode launch config
+launch.json
+build/
+*.pkg
+Assets/souvenirs
