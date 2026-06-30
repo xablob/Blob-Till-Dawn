@@ -2,10 +2,11 @@ import pygame
 from pygame.locals import RESIZABLE
 
 from params import dimx, dimy
-
+from utilities import sauvegarder_save
 
 class Gamestate:
-    def __init__(self):
+    def __init__(self, savefile):
+        self.savefile = savefile
         self.hero_group = pygame.sprite.Group()
         self.enemies_group = pygame.sprite.Group()
         self.boss_group = pygame.sprite.Group()
@@ -137,6 +138,16 @@ class Gamestate:
 
     def stop_printing_messages(self):
         self.print_messages = False
+
+    def end_game(self):
+        self.form_the_l()
+        self.camera_group.draw_objects = False
+        self.draw_remaining_mobs = False
+        self.camera_group.get_scores()
+        self.savefile["noms"].append(self.hero.leaderboard_name)
+        self.savefile["gold"] += self.hero.kills
+        sauvegarder_save(self.savefile)
+
 
 
 def final_position(id, last_coordinates, n_sprites):

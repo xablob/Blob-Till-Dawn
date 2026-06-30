@@ -1,6 +1,24 @@
 import numpy as np
 import pygame
 
+import json
+
+def charger_save():
+    with open("save.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+    
+reset_save = False #à ne mettre True que si on veut effacer la sauvegarde !!!
+
+def sauvegarder_save(save):
+    if reset_save:
+        to_save = {
+            "noms": [],
+            "gold": 0
+        }
+    else:
+        to_save = save
+    with open("save.json", "w", encoding="utf-8") as f:
+        json.dump(to_save, f, indent=4)
 
 def reshape(image, coeff):
     dim = image.get_size()

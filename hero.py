@@ -22,7 +22,6 @@ from projectile import ProjectileSkill, fireball_image
 from rotating_orb import RotatingOrb
 from shuriken import ShurikenSkill
 from utilities import reshape
-from aoe_effects import Polygon_effect
 
 pickup_cooldown = 1000
 
@@ -300,10 +299,8 @@ class Hero(pygame.sprite.Sprite):
         self.gamestate.last_hero_coordinates = self.rect.center
         self.export_score()
         self.kill()
-        self.gamestate.form_the_l()
-        self.gamestate.camera_group.draw_objects = False
-        self.gamestate.draw_remaining_mobs = False
-        self.gamestate.camera_group.get_scores()
+        self.gamestate.end_game()
+        
 
     def reset_orbs(self):
         for orb in self.rotating_orbs.sprites():
@@ -482,28 +479,27 @@ class Hero(pygame.sprite.Sprite):
         # #     self.level_up()
         # # if keys_pressed[pygame.K_b]:
         # #     gamestate.spawn_boss(500)
-        if keys_pressed[pygame.K_LCTRL] and time - self.last_rewind > self.rewind_cooldown:
-            old_center = self.rect.center
-            old_self = pygame.sprite.Sprite(self.camera_group)
-            old_self.image = self.image
-            old_self.rect = old_self.image.get_rect(center=self.rect.center)
-            self.old_life = self.life
-            self.old_velocity = self.velocity
-            self.velocity = 2 * self.velocity
-            self.rewind_image = old_self
-            self.time_rewind = time + self.rewind_window
-            self.last_rewind = time
-            self.old_velocity = self.velocity
-            self.velocity = 2 * self.velocity
-        if self.time_rewind:
-            if time > self.time_rewind:
-                self.rect.center = self.rewind_image.rect.center
-                self.life = self.old_life
-                self.velocity = self.old_velocity
-                self.rewind_image.kill()
-                self.time_rewind = False
-                self.reset_orbs()
-                has_tp = True
+        # if keys_pressed[pygame.K_LCTRL] and time - self.last_rewind > self.rewind_cooldown:
+        #     old_self = pygame.sprite.Sprite(self.gamestate.camera_group)
+        #     old_self.image = self.image
+        #     old_self.rect = old_self.image.get_rect(center=self.rect.center)
+        #     self.old_life = self.life
+        #     self.old_velocity = self.velocity
+        #     self.velocity = 2 * self.velocity
+        #     self.rewind_image = old_self
+        #     self.time_rewind = time + self.rewind_window
+        #     self.last_rewind = time
+        #     self.old_velocity = self.velocity
+        #     self.velocity = 2 * self.velocity
+        # if self.time_rewind:
+        #     if time > self.time_rewind:
+        #         self.rect.center = self.rewind_image.rect.center
+        #         self.life = self.old_life
+        #         self.velocity = self.old_velocity
+        #         self.rewind_image.kill()
+        #         self.time_rewind = False
+        #         self.reset_orbs()
+        #         has_tp = True
         if keys_pressed[pygame.K_SPACE] and time - self.last_tp > self.tp_cooldown:
             self.rect.x += self.direction_vector[0] * self.tp_distance
             self.rect.y += self.direction_vector[1] * self.tp_distance

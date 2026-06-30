@@ -10,16 +10,35 @@ from map_objects import create_animated_fires, create_trees
 import sys
 import os
 
+from utilities import charger_save, sauvegarder_save
+
 def resource_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
+from pathlib import Path
+import json
+
+save_file = Path("save.json")
+
+# Création du fichier s'il n'existe pas
+if not save_file.exists():
+    save = {
+        "noms": [],
+        "gold": 0
+    }
+    sauvegarder_save(save)
+else: 
+    save = charger_save()
+
+
+
 # Signal de départ pour la logique du jeu, activé après la fin des menus ou des tutoriels
 game_has_started = False
 
 pygame.init()
-gamestate = Gamestate()
+gamestate = Gamestate(save)
 
 initiate_floor(gamestate)
 camera_group = CameraGroup(gamestate)

@@ -5,7 +5,6 @@ from game_init import (
     game_has_started,
     gamestate,
     hero,
-    last_music_flip,
     music_paused,
     starting_menu,
 )
@@ -16,7 +15,6 @@ from items import items
 from map_objects import map_objects
 
 from projectile import Skillshots, entity_targeted_projectiles
-import numpy as np
 
 def update_game(keys_pressed, mouse_pos, mouse_keys, time):
     """Cette fonction met à jour tout le jeu, principalement en appelant les fonctions update de chaque Sprite"""
@@ -107,6 +105,9 @@ class Game:
         if keys[pygame.K_p] and self.real_game_time - self.last_pause_flip > 100 and gamestate.is_paused:
             gamestate.is_paused = False
             self.last_music_flip = self.real_game_time
+
+        if keys[pygame.K_p] and keys[pygame.K_LCTRL]:
+            gamestate.end_game()
 
         # On décompte le temps total de pause
         self.game_is_paused_this_frame = gamestate.is_paused
